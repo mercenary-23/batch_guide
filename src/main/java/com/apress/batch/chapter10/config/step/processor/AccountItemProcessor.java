@@ -51,12 +51,12 @@ public class AccountItemProcessor implements ItemProcessor<Statement, Statement>
             while (rs.next()) {
                 if (curAccount == null) {
                     curAccount = new Account(rs.getLong("account_id"), rs.getBigDecimal("balance"),
-                        rs.getDate("last_statement_date"));
+                        rs.getTimestamp("last_statement_date").toLocalDateTime());
                 } else if (rs.getLong("account_id") != curAccount.getId()) {
                     accounts.add(curAccount);
 
                     curAccount = new Account(rs.getLong("account_id"), rs.getBigDecimal("balance"),
-                        rs.getDate("last_statement_date"));
+                        rs.getTimestamp("last_statement_date").toLocalDateTime());
                 }
 
                 if (StringUtils.hasText(rs.getString("description"))) {
