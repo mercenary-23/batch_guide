@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ public class CustomerItemValidator implements Validator<CustomerUpdate> {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private static final String FIND_CUSTOMER = "SELECT COUNT(*) FROM customer WHERE customer_id = :id";
 
+    @Autowired
     public CustomerItemValidator(DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS customer  (
-  customer_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY ,
+  customer_id BIGINT NOT NULL PRIMARY KEY ,
   first_name VARCHAR(45) NOT NULL ,
   middle_name VARCHAR(45),
   last_name VARCHAR(45) NOT NULL,

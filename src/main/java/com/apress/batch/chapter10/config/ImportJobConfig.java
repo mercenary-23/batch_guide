@@ -6,6 +6,7 @@ import com.apress.batch.chapter10.config.step.ImportCustomerStep;
 import com.apress.batch.chapter10.config.step.ImportTransactionStep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.cloud.task.configuration.EnableTask;
@@ -14,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableBatchProcessing
 //@EnableTask
 public class ImportJobConfig {
 

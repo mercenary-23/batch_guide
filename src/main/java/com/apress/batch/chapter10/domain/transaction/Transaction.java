@@ -1,6 +1,7 @@
 package com.apress.batch.chapter10.domain.transaction;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -22,10 +23,10 @@ public class Transaction {
     private String description;
     private BigDecimal credit;
     private BigDecimal debit;
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
     @XmlJavaTypeAdapter(JaxbDateSerializer.class)
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
 

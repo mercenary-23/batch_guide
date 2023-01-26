@@ -47,7 +47,7 @@ public class ApplyTransactionStep {
                 .description(rs.getString("description"))
                 .credit(rs.getBigDecimal("credit"))
                 .debit(rs.getBigDecimal("debit"))
-                .timestamp(rs.getTimestamp("timestamp"))
+                .timestamp(rs.getTimestamp("timestamp").toLocalDateTime())
                 .build())
             .build();
     }

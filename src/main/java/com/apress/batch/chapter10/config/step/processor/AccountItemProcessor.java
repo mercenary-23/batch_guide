@@ -67,7 +67,7 @@ public class AccountItemProcessor implements ItemProcessor<Statement, Statement>
                             .description(rs.getString("description"))
                             .credit(rs.getBigDecimal("credit"))
                             .debit(rs.getBigDecimal("debit"))
-                            .timestamp(new Date(rs.getTimestamp("timestamp").getTime()))
+                            .timestamp(rs.getTimestamp("timestamp").toLocalDateTime())
                         .build());
                 }
             }
