@@ -21,6 +21,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @SpringBatchTest
 @SpringBootTest
+@Sql("classpath:schema.sql")
 @Sql("classpath:data-test.sql")
 public class ImportCustomerStepTest {
 

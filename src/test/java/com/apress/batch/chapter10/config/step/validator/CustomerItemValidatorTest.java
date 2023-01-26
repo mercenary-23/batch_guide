@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @JdbcTest
+@Sql("classpath:schema.sql")
 @Sql("classpath:data-test.sql")
 class CustomerItemValidatorTest {
 
@@ -37,14 +38,10 @@ class CustomerItemValidatorTest {
     @DisplayName("Customer 객체의 정보가 customer table에 존재하는 경우")
     void testCustomerExists() {
         //given
-        CustomerUpdate customer = new CustomerUpdate(1L);
+        CustomerUpdate customer = new CustomerUpdate(501L);
 
         //when & then
         validator.validate(customer);
-
-        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM customer",
-            Integer.class);
-        System.out.println("----------COUNT : " + count + " ----------------");
     }
 
     @Test

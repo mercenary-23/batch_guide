@@ -18,9 +18,11 @@ import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.jdbc.Sql;
 
 @SpringBatchTest
 @SpringBootTest
+@Sql("classpath:schema.sql")
 public class ImportTransactionStepTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;

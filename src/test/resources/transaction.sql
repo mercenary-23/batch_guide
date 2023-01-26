@@ -1,0 +1,1 @@
+insert into transaction (account_account_id, description, credit, debit, timestamp) values (1, 'Kazu', null, -4414, '2018-06-14 01:45:23');
