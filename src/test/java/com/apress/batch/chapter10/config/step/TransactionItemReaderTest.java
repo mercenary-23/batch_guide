@@ -56,6 +56,7 @@ public class TransactionItemReaderTest {
         assertThat(tx.getDescription()).isEqualTo("Tom");
         assertThat(tx.getCredit().intValue()).isEqualTo(538);
         assertThat(tx.getDebit().intValue()).isEqualTo(-438);
+        assertThat(tx.getTimestamp()).isNotNull();
     }
 
 }

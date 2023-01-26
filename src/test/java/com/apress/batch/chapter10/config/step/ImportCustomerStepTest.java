@@ -22,7 +22,7 @@ import org.springframework.test.context.jdbc.Sql;
 @SpringBatchTest
 @SpringBootTest
 @Sql("classpath:data-test.sql")
-public class ImportCustomerUpdatesTest {
+public class ImportCustomerStepTest {
 
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
