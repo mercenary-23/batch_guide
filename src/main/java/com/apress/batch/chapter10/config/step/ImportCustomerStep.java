@@ -1,5 +1,6 @@
 package com.apress.batch.chapter10.config.step;
 
+import com.apress.batch.chapter10.config.step.listener.CustomerItemListener;
 import com.apress.batch.chapter10.config.step.writer.CustomerUpdateItemWriter;
 import com.apress.batch.chapter10.domain.customer.CustomerAddressUpdate;
 import com.apress.batch.chapter10.domain.customer.CustomerContactUpdate;
@@ -39,6 +40,10 @@ public class ImportCustomerStep {
             .reader(customerUpdateItemReader(null))
             .processor(customerValidatingItemProcessor(null))
             .writer(customerUpdateItemWriter.compositeItemWriter())
+            .faultTolerant()
+            .skip(Exception.class)
+            .skipLimit(10)
+            .listener(new CustomerItemListener())
             .build();
     }
 
