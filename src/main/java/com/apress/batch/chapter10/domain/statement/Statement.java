@@ -10,11 +10,11 @@ import lombok.Setter;
 public class Statement {
 
     private final Customer customer;
-    private List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts;
 
     public Statement(Customer customer, List<Account> accounts) {
         this.customer = customer;
-        this.accounts.addAll(accounts);
+        this.accounts = accounts;
     }
 
     public Statement(Customer customer) {

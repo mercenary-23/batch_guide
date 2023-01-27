@@ -5,6 +5,7 @@ import com.apress.batch.chapter10.domain.statement.Customer;
 import com.apress.batch.chapter10.domain.statement.Statement;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.util.CollectionUtils;
@@ -45,7 +46,7 @@ public class StatementLineAggregator implements LineAggregator<Statement> {
     private void formatAccount(Statement statement, StringBuilder output) {
         if (!CollectionUtils.isEmpty(statement.getAccounts())) {
             for (Account account : statement.getAccounts()) {
-                output.append(String.format(STATEMENT_DATE_LINE, account.getLastStatementDate(), new Date()));
+                output.append(String.format(STATEMENT_DATE_LINE, account.getLastStatementDate(), LocalDateTime.now()));
 
                 BigDecimal creditAmount = new BigDecimal(0);
                 BigDecimal debitAmount = new BigDecimal(0);

@@ -25,7 +25,7 @@ public class AccountItemProcessor implements ItemProcessor<Statement, Statement>
 
     @Override
     public Statement process(Statement statement) throws Exception {
-        String sql = "SELECT a.account_id, a.balance, a.last_statement_date, "
+        final String sql = "SELECT a.account_id, a.balance, a.last_statement_date, "
             + "t.transaction_id, t.description, t.credit, t.debit, t.timestamp "
             + "FROM account AS a LEFT JOIN transaction AS t "
             + "  ON a.account_id = t.account_account_id "
@@ -42,12 +42,12 @@ public class AccountItemProcessor implements ItemProcessor<Statement, Statement>
 
     private static class AccountResultSetExtractor implements ResultSetExtractor<List<Account>> {
 
-        private List<Account> accounts = new ArrayList<>();
-        private Account curAccount;
+        private final List<Account> accounts = new ArrayList<>();
 
         @Nullable
         @Override
         public List<Account> extractData(ResultSet rs) throws SQLException, DataAccessException {
+            Account curAccount = null;
             while (rs.next()) {
                 if (curAccount == null) {
                     curAccount = new Account(rs.getLong("account_id"), rs.getBigDecimal("balance"),

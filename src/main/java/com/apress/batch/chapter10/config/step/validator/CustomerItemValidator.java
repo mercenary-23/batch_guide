@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Component;
 public class CustomerItemValidator implements Validator<CustomerUpdate> {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
-    private static final String FIND_CUSTOMER = "SELECT COUNT(*) FROM customer WHERE customer_id = :id";
 
     @Autowired
     public CustomerItemValidator(DataSource dataSource) {
@@ -23,8 +23,9 @@ public class CustomerItemValidator implements Validator<CustomerUpdate> {
 
     @Override
     public void validate(CustomerUpdate customer) throws ValidationException {
-        Map<String, Long> parameterMap = Collections.singletonMap("id", customer.getCustomerId());
-        Long count = jdbcTemplate.queryForObject(FIND_CUSTOMER, parameterMap, Long.class);
+        Long count = jdbcTemplate.queryForObject(
+            "SELECT COUNT(*) FROM customer WHERE customer_id = :id",
+            new MapSqlParameterSource().addValue("id", customer.getCustomerId()), Long.class);
 
         if (count == 0) {
             throw new ValidationException(

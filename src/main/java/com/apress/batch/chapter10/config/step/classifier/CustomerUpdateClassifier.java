@@ -32,7 +32,7 @@ public class CustomerUpdateClassifier implements Classifier<CustomerUpdate, Item
             return recordType3ItemWriter;
         } else {
             throw new IllegalArgumentException(
-                "Invalid Type");
+                "Invalid Type for CustomerUpdateClassifier");
         }
     }
 }

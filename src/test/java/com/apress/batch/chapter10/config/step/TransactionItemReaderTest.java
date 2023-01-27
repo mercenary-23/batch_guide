@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.apress.batch.chapter10.config.ImportJobConfig;
 import com.apress.batch.chapter10.config.step.processor.AccountItemProcessor;
 import com.apress.batch.chapter10.config.step.validator.CustomerItemValidator;
+import com.apress.batch.chapter10.config.step.writer.CustomerUpdateItemWriter;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(classes = {ImportJobConfig.class,
     ImportCustomerStep.class, ImportTransactionStep.class,
     ApplyTransactionStep.class, GenerateStatementStep.class,
-    CustomerItemValidator.class, AccountItemProcessor.class})
+    CustomerItemValidator.class, AccountItemProcessor.class,
+    CustomerUpdateItemWriter.class})
 @EnableBatchProcessing
 @SpringBatchTest
 @JdbcTest
