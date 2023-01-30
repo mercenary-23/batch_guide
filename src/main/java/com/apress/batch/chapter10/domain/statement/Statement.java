@@ -1,12 +1,13 @@
 package com.apress.batch.chapter10.domain.statement;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class Statement {
 
     private final Customer customer;

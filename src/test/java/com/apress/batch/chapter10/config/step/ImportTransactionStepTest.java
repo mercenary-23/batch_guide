@@ -6,6 +6,7 @@ import com.apress.batch.chapter10.domain.transaction.Transaction;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.sql.DataSource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,12 +29,8 @@ public class ImportTransactionStepTest {
     private JobLauncherTestUtils jobLauncherTestUtils;
     @Autowired
     private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @BeforeEach
-    void setUp() {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     @Test
     @DisplayName("ImportTransactionStep TEST")

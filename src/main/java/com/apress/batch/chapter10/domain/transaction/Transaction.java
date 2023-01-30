@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @XmlRootElement(name = "transaction")
 @NoArgsConstructor
@@ -18,6 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
+@ToString
 public class Transaction {
     private long transactionId;
     private long accountId;

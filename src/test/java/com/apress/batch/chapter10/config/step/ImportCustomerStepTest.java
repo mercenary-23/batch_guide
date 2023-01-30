@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.apress.batch.chapter10.domain.statement.Customer;
 import java.util.List;
 import javax.sql.DataSource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,12 +30,8 @@ public class ImportCustomerStepTest {
     private JobLauncherTestUtils jobLauncherTestUtils;
     @Autowired
     private DataSource dataSource;
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @BeforeEach
-    void setUp() {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     @Test
     @DisplayName("ImportCustomerStep TEST")

@@ -3,10 +3,12 @@ package com.apress.batch.chapter10.domain.statement;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Builder
+@ToString
 public class Customer {
     private final long id;
     private final String firstName;
