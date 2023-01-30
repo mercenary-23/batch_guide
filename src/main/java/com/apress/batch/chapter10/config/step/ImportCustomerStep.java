@@ -1,6 +1,6 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.config.step.listener.CustomerItemListener;
+import com.apress.batch.chapter10.config.step.listener.ExceptionLogListner;
 import com.apress.batch.chapter10.config.step.writer.CustomerUpdateItemWriter;
 import com.apress.batch.chapter10.domain.customer.CustomerAddressUpdate;
 import com.apress.batch.chapter10.domain.customer.CustomerContactUpdate;
@@ -32,6 +32,7 @@ public class ImportCustomerStep {
 
     private final StepBuilderFactory stepBuilderFactory;
     private final CustomerUpdateItemWriter customerUpdateItemWriter;
+    private final ExceptionLogListner exceptionLogListner;
 
     @Bean
     public Step importCustomerUpdates() throws Exception {
@@ -43,7 +44,7 @@ public class ImportCustomerStep {
             .faultTolerant()
             .skip(Exception.class)
             .skipLimit(10)
-            .listener(new CustomerItemListener())
+            .listener(exceptionLogListner)
             .build();
     }
 

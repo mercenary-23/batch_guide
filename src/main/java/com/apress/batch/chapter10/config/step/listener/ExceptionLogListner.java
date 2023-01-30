@@ -2,9 +2,11 @@ package com.apress.batch.chapter10.config.step.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.annotation.OnReadError;
+import org.springframework.stereotype.Component;
 
 @Slf4j
-public class CustomerItemListener {
+@Component
+public class ExceptionLogListner {
 
     @OnReadError
     public void onReadError(Exception e) {
