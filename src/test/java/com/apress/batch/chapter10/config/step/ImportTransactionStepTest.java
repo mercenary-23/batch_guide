@@ -28,8 +28,6 @@ public class ImportTransactionStepTest {
     @Autowired
     private JobLauncherTestUtils jobLauncherTestUtils;
     @Autowired
-    private DataSource dataSource;
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Test

@@ -1,6 +1,6 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.domain.statement.Customer;
+import com.apress.batch.chapter10.domain.customer.Customer;
 import com.apress.batch.chapter10.domain.statement.Statement;
 import com.apress.batch.chapter10.config.step.processor.AccountItemProcessor;
 import com.apress.batch.chapter10.config.step.writer.StatementHeaderCallback;

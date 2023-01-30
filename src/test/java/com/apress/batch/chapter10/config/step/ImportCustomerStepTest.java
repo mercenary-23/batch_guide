@@ -2,11 +2,9 @@ package com.apress.batch.chapter10.config.step;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.apress.batch.chapter10.domain.statement.Customer;
+import com.apress.batch.chapter10.domain.customer.Customer;
 import java.util.List;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;

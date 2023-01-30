@@ -50,12 +50,12 @@ public class ImportTransactionStep {
     public JdbcBatchItemWriter<Transaction> transactionItemWriter(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Transaction>()
             .dataSource(dataSource)
-            .sql("INSERT INTO transaction (transaction_id, "
+            .sql("INSERT INTO transaction ("
                 + "account_account_id, "
                 + "description, "
                 + "credit, "
                 + "debit, "
-                + "timestamp) values (:transactionId, "
+                + "timestamp) values ("
                 + ":accountId, "
                 + ":description, "
                 + ":credit, "

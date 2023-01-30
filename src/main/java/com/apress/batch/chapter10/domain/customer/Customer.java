@@ -1,4 +1,4 @@
-package com.apress.batch.chapter10.domain.statement;
+package com.apress.batch.chapter10.domain.customer;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

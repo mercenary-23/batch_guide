@@ -3,9 +3,11 @@ package com.apress.batch.chapter10.domain.customer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.util.StringUtils;
 
 @Getter
+@ToString
 public class CustomerNameUpdate extends CustomerUpdate{
 
     private final String firstName;

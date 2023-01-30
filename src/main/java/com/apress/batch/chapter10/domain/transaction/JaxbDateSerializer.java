@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class JaxbDateSerializer extends XmlAdapter<String, LocalDateTime> {
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public String marshal(LocalDateTime date) throws Exception {

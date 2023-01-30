@@ -1,12 +1,11 @@
 package com.apress.batch.chapter10.config.step.writer;
 
 import com.apress.batch.chapter10.domain.statement.Account;
-import com.apress.batch.chapter10.domain.statement.Customer;
+import com.apress.batch.chapter10.domain.customer.Customer;
 import com.apress.batch.chapter10.domain.statement.Statement;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
 import org.springframework.batch.item.file.transform.LineAggregator;
 import org.springframework.util.CollectionUtils;
 
