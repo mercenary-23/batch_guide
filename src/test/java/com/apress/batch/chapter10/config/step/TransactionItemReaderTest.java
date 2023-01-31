@@ -3,7 +3,10 @@ package com.apress.batch.chapter10.config.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.apress.batch.chapter10.config.ImportJobConfig;
-import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
+import com.apress.batch.chapter10.config.step.listener.ApplyTransactionLogListener;
+import com.apress.batch.chapter10.config.step.listener.GenerateStatementLogListener;
+import com.apress.batch.chapter10.config.step.listener.ImportCustomerLogListener;
+import com.apress.batch.chapter10.config.step.listener.ImportTransactionLogListener;
 import com.apress.batch.chapter10.config.step.processor.AccountItemProcessor;
 import com.apress.batch.chapter10.config.step.validator.CustomerItemValidator;
 import com.apress.batch.chapter10.config.step.writer.CustomerUpdateItemWriter;
@@ -21,18 +24,14 @@ import org.springframework.batch.test.MetaDataInstanceFactory;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {ImportJobConfig.class,
-    ImportCustomerStep.class, ImportTransactionStep.class,
-    ApplyTransactionStep.class, GenerateStatementStep.class,
-    CustomerItemValidator.class, AccountItemProcessor.class,
-    CustomerUpdateItemWriter.class, ExceptionLogListener.class})
-@EnableBatchProcessing
+@SpringBootTest
+@TestPropertySource(properties = {"spring.cloud.task.closecontext_enable=false"})
 @SpringBatchTest
-@JdbcTest
 public class TransactionItemReaderTest {
 
     @Autowired

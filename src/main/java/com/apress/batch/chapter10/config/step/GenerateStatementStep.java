@@ -1,6 +1,7 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
+import com.apress.batch.chapter10.config.step.listener.GenerateStatementLogListener;
+import com.apress.batch.chapter10.config.step.listener.ImportCustomerLogListener;
 import com.apress.batch.chapter10.domain.customer.Customer;
 import com.apress.batch.chapter10.domain.statement.Statement;
 import com.apress.batch.chapter10.config.step.processor.AccountItemProcessor;
@@ -26,7 +27,7 @@ import org.springframework.core.io.Resource;
 public class GenerateStatementStep {
 
     private final StepBuilderFactory stepBuilderFactory;
-    private final ExceptionLogListener exceptionLogListener;
+    private final GenerateStatementLogListener generateStatementLogListener;
 
     @Bean
     public Step generateStatements(AccountItemProcessor itemProcessor) {
@@ -35,7 +36,7 @@ public class GenerateStatementStep {
             .reader(statementItemReader(null))
             .processor(itemProcessor)
             .writer(statementItemWriter(null))
-            .listener(exceptionLogListener)
+            .listener(generateStatementLogListener)
             .build();
     }
 

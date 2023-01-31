@@ -1,6 +1,7 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
+import com.apress.batch.chapter10.config.step.listener.ApplyTransactionLogListener;
+import com.apress.batch.chapter10.config.step.listener.ImportCustomerLogListener;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class ApplyTransactionStep {
 
     private final StepBuilderFactory stepBuilderFactory;
-    private final ExceptionLogListener exceptionLogListener;
+    private final ApplyTransactionLogListener applyTransactionLogListener;
 
     @Bean
     public Step applyTransactions() {
@@ -29,7 +30,7 @@ public class ApplyTransactionStep {
             .<Transaction, Transaction>chunk(100)
             .reader(applyTransactionReader(null, null))
             .writer(applyTransactionWriter(null))
-            .listener(exceptionLogListener)
+            .listener(applyTransactionLogListener)
             .build();
     }
 
