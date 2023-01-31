@@ -1,10 +1,9 @@
 package com.apress.batch.chapter10.domain.transaction;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

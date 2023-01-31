@@ -1,6 +1,6 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.config.step.listener.ExceptionLogListner;
+import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 public class ImportTransactionStep {
 
     private final StepBuilderFactory stepBuilderFactory;
-    private final ExceptionLogListner exceptionLogListner;
+    private final ExceptionLogListener exceptionLogListener;
 
     @Bean
     public Step importTransactions() {
@@ -30,7 +30,7 @@ public class ImportTransactionStep {
             .<Transaction, Transaction>chunk(100)
             .reader(transactionItemReader(null))
             .writer(transactionItemWriter(null))
-            .listener(exceptionLogListner)
+            .listener(exceptionLogListener)
             .build();
     }
 
@@ -42,7 +42,7 @@ public class ImportTransactionStep {
         unMarshaller.setClassesToBeBound(Transaction.class);
 
         return new StaxEventItemReaderBuilder<Transaction>()
-            .name("fooReader")
+            .name("transactionItemReader")
             .resource(transactionFile)
             .addFragmentRootElements("transaction")
             .unmarshaller(unMarshaller)

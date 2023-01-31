@@ -1,57 +1,70 @@
 package com.apress.batch.chapter10.config.step;
 
-import com.apress.batch.chapter10.config.step.listener.ExceptionLogListner;
+import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
 import com.apress.batch.chapter10.domain.transaction.Transaction;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
-import org.springframework.batch.item.database.JdbcCursorItemReader;
+import org.springframework.batch.item.database.JdbcPagingItemReader;
+import org.springframework.batch.item.database.PagingQueryProvider;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
-import org.springframework.batch.item.database.builder.JdbcCursorItemReaderBuilder;
+import org.springframework.batch.item.database.builder.JdbcPagingItemReaderBuilder;
+import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.RowMapper;
 
 @Configuration
 @RequiredArgsConstructor
 public class ApplyTransactionStep {
 
     private final StepBuilderFactory stepBuilderFactory;
-    private final ExceptionLogListner exceptionLogListner;
+    private final ExceptionLogListener exceptionLogListener;
 
     @Bean
     public Step applyTransactions() {
         return stepBuilderFactory.get("applyTransactions")
             .<Transaction, Transaction>chunk(100)
-            .reader(applyTransactionReader(null))
+            .reader(applyTransactionReader(null, null))
             .writer(applyTransactionWriter(null))
-            .listener(exceptionLogListner)
+            .listener(exceptionLogListener)
             .build();
     }
 
     @Bean
-    public JdbcCursorItemReader<Transaction> applyTransactionReader(DataSource dataSource) {
-        return new JdbcCursorItemReaderBuilder<Transaction>()
+    public JdbcPagingItemReader<Transaction> applyTransactionReader(DataSource dataSource, PagingQueryProvider queryProvider) {
+        return new JdbcPagingItemReaderBuilder<Transaction>()
             .name("applyTransactionReader")
             .dataSource(dataSource)
-            .sql("SELECT transaction_id, "
-                + "account_account_id, "
-                + "description, "
-                + "credit, "
-                + "debit, "
-                + "timestamp "
-                + "FROM transaction "
-                + "ORDER BY timestamp")
-            .rowMapper((rs, rowNum) -> Transaction
-                .builder()
-                .transactionId(rs.getLong("transaction_id"))
-                .accountId(rs.getLong("account_account_id"))
-                .description(rs.getString("description"))
-                .credit(rs.getBigDecimal("credit"))
-                .debit(rs.getBigDecimal("debit"))
-                .timestamp(rs.getTimestamp("timestamp").toLocalDateTime())
-                .build())
+            .queryProvider(queryProvider)
+            .pageSize(100)
+            .rowMapper(transactionRowMapper())
+            .build();
+    }
+
+    @Bean
+    public PagingQueryProvider createQueryProvider(DataSource dataSource) throws Exception {
+        SqlPagingQueryProviderFactoryBean factoryBean = new SqlPagingQueryProviderFactoryBean();
+
+        factoryBean.setSelectClause("SELECT *");
+        factoryBean.setFromClause("FROM transaction");
+        factoryBean.setSortKey("timestamp");
+        factoryBean.setDataSource(dataSource);
+
+        return factoryBean.getObject();
+    }
+
+    private RowMapper<Transaction> transactionRowMapper()  {
+        return (rs, rowNum) -> Transaction
+            .builder()
+            .transactionId(rs.getLong("transaction_id"))
+            .accountId(rs.getLong("account_account_id"))
+            .description(rs.getString("description"))
+            .credit(rs.getBigDecimal("credit"))
+            .debit(rs.getBigDecimal("debit"))
+            .timestamp(rs.getTimestamp("timestamp").toLocalDateTime())
             .build();
     }
 

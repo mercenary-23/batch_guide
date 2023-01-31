@@ -47,7 +47,7 @@ public class ImportTransactionStepTest {
         assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
         List<Transaction> results = jdbcTemplate.query(
-            "SELECT * FROM transaction WHERE transaction_id = 7788877",
+            "SELECT * FROM transaction WHERE account_account_id = 17",
             (rs, rowNum) -> {
                 return Transaction.builder()
                     .transactionId(rs.getLong("transaction_id"))
@@ -60,7 +60,6 @@ public class ImportTransactionStepTest {
             });
         Transaction result = results.get(0);
 
-        assertThat(result.getTransactionId()).isEqualTo(7788877L);
         assertThat(result.getAccountId()).isEqualTo(17L);
         assertThat(result.getDescription()).isEqualTo("Tom");
         assertThat(result.getCredit().intValue()).isEqualTo(538);

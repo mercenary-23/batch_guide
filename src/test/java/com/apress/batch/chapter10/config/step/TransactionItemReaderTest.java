@@ -3,6 +3,7 @@ package com.apress.batch.chapter10.config.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.apress.batch.chapter10.config.ImportJobConfig;
+import com.apress.batch.chapter10.config.step.listener.ExceptionLogListener;
 import com.apress.batch.chapter10.config.step.processor.AccountItemProcessor;
 import com.apress.batch.chapter10.config.step.validator.CustomerItemValidator;
 import com.apress.batch.chapter10.config.step.writer.CustomerUpdateItemWriter;
@@ -28,7 +29,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
     ImportCustomerStep.class, ImportTransactionStep.class,
     ApplyTransactionStep.class, GenerateStatementStep.class,
     CustomerItemValidator.class, AccountItemProcessor.class,
-    CustomerUpdateItemWriter.class})
+    CustomerUpdateItemWriter.class, ExceptionLogListener.class})
 @EnableBatchProcessing
 @SpringBatchTest
 @JdbcTest

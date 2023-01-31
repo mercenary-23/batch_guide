@@ -6,12 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class ExceptionLogListner {
+public class ExceptionLogListener {
 
     @OnReadError
     public void onReadError(Exception e) {
-        log.error("Error has occurred", e);
+        log.error("Read Error has occurred", e);
         log.error("Error Message = {}", e.getMessage());
         e.printStackTrace();
     }
+
 }
