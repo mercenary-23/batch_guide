@@ -1,8 +1,7 @@
 package com.apress.batch.chapter10.config.step.validator;
 
 import com.apress.batch.chapter10.domain.customer.CustomerUpdate;
-import java.util.Collections;
-import java.util.Map;
+import java.util.Objects;
 import javax.sql.DataSource;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
@@ -27,9 +26,13 @@ public class CustomerItemValidator implements Validator<CustomerUpdate> {
             "SELECT COUNT(*) FROM customer WHERE customer_id = :id",
             new MapSqlParameterSource().addValue("id", customer.getCustomerId()), Long.class);
 
+        Objects.requireNonNull(count,
+            "JdbcTemplate의 queryForObject 메서드가 Null을 반환했습니다. SQL : SELECT COUNT(*) FROM customer WHERE customer_id = :id");
+
         if (count == 0) {
             throw new ValidationException(
-                String.format("Customer id %s was not able to be found", customer.getCustomerId())
+                String.format("Customer id %s was not able to be found in the database",
+                    customer.getCustomerId())
             );
         }
     }
