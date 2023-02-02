@@ -15,26 +15,21 @@ public class GenerateStatementLogListener {
 
     @OnReadError
     public void onReadError(Exception e) {
-        log.error("GenerateStatementStep Reader Error has occurred", e);
-        log.error("Error Message = {}", e.getMessage());
-        e.printStackTrace();
+        log.error("GenerateStatementStep Reader Error has occurred", e.toString());
     }
 
     @OnProcessError
     public void onProcessError(Statement item, Exception e) {
-        log.error("GenerateStatementStep Processor Error has occurred", e);
+        log.error("GenerateStatementStep Processor Error has occurred", e.toString());
         log.error("Statement in Processor = {}", item.toString());
-        log.error("Error Message = {}", e.getMessage());
-        e.printStackTrace();
     }
 
     @OnWriteError
     public void onWriteError(Exception e, List<? extends Statement> items) {
-        log.error("GenerateStatementStep Writer Error has occurred", e);
+        log.error("GenerateStatementStep Writer Error has occurred", e.toString());
         log.error("Statement Size in Writer = {}", items.size());
         for (Statement item : items) {
             log.error("Statement in Writer = {}", item.toString());
         }
-        log.error("Error Message = {}", e.getMessage());
     }
 }

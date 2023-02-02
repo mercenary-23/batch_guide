@@ -14,17 +14,14 @@ public class ApplyTransactionLogListener {
     @OnReadError
     public void onReadError(Exception e) {
         log.error("ApplyTransactionStep Reader Error has occurred", e);
-        log.error("Error Message = {}", e.getMessage());
-        e.printStackTrace();
     }
 
     @OnWriteError
     public void onWriteError(Exception e, List<? extends Transaction> items) {
-        log.error("ApplyTransactionStep Writer Error has occurred", e);
+        log.error("ApplyTransactionStep Writer Error has occurred", e.toString());
         log.error("Transaction Size in Writer = {}", items.size());
         for (Transaction item : items) {
             log.error("Transaction in Writer = {}", item.toString());
         }
-        log.error("Error Message = {}", e.getMessage());
     }
 }

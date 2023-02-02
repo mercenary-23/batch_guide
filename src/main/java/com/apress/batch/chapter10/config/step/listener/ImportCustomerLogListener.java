@@ -15,26 +15,21 @@ public class ImportCustomerLogListener {
     @OnReadError
     public void onReadError(Exception e) {
         log.error("ImportCustomerStep Reader Error has occurred", e);
-        log.error("Error Message = {}", e.getMessage());
-        e.printStackTrace();
     }
 
     @OnProcessError
     public void onProcessError(CustomerUpdate item, Exception e) {
-        log.error("ImportCustomerStep Processor Error has occurred", e);
+        log.error("ImportCustomerStep Processor Error has occurred", e.toString());
         log.error("CustomerUpdate in Processor = {}", item.toString());
-        log.error("Error Message = {}", e.getMessage());
-        e.printStackTrace();
     }
 
     @OnWriteError
     public void onWriteError(Exception e, List<? extends CustomerUpdate> items) {
-        log.error("ImportCustomerStep Writer Error has occurred", e);
+        log.error("ImportCustomerStep Writer Error has occurred", e.toString());
         log.error("CustomerUpdate Size in Writer = {}", items.size());
         for (CustomerUpdate item : items) {
             log.error("CustomerUpdate in Writer = {}", item.toString());
         }
-        log.error("Error Message = {}", e.getMessage());
     }
 
 }
